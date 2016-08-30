@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function mkdircd()
+{
+	if [ $# -ne 1 ]; then
+		echo "path missing"
+		exit 1
+	fi
+
+	mkdir $1 && cd $1
+}
+
