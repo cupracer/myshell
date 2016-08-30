@@ -1,0 +1,6 @@
+[submodule "vendor/imapsync"]
+	path = vendor/imapsync
+	url = git@github.com:imapsync/imapsync.git
+[submodule "vendor/MySQLTuner-perl"]
+	path = vendor/MySQLTuner-perl
+	url = git@github.com:major/MySQLTuner-perl.git
