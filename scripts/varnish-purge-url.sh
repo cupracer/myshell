@@ -10,7 +10,7 @@ elif [ $# -eq 3 ]; then
 	VARNISHPORT="$2"
 	URL="$3"
 else
-        echo "usage: $(basename $0) [varnish-ip varnish-ip] target-url"
+        echo "usage: $(basename $0) [varnish-ip varnish-port] target-url"
         exit 1
 fi
 
