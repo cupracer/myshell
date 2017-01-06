@@ -32,3 +32,15 @@ sed -n "/\#\ \/bin\/dmesg/,\$p" "${BASEDIR}/boot.txt" | sed "1d" | \
 	perl -ne "BEGIN{\$a= $(date --date="$(cat "${BASEDIR}/basic-environment.txt" |grep -A1 /bin/date |grep -v date)" +\"%s\")- \
 		qx!$(grep -A1 \"/proc/uptime\" "${BASEDIR}/proc.txt" |grep -v uptime)!}; s/\[\s*(\d+)\.\d+\]/localtime(\$1 + \$a)/e; print \$_;"
 
+
+SCDMESG=$(sed -n "/\#\ \/bin\/dmesg/,\$p" "${BASEDIR}/boot.txt" | sed "1d")
+SCDATETIME="$(cat "${BASEDIR}/basic-environment.txt" |grep -A1 /bin/date |grep -v date)"
+SCTIMESTAMP=$(date --date="${SCDATETIME}" +"%s")
+SCUPTIME=$(grep -A1 "/proc/uptime" "${BASEDIR}/proc.txt" |grep -v uptime |cut -d" " -f1)
+
+#echo "SCDATETIME  = ${SCDATETIME}"
+#echo "SCTIMESTAMP = ${SCTIMESTAMP}"
+#echo "SCUPTIME    = ${SCUPTIME}"
+
+echo "${SCDMESG}" | perl -ne "BEGIN{\$a= ${SCTIMESTAMP}-${SCUPTIME}}; s/\[\s*(\d+)\.\d+\]/localtime(\$1 + \$a)/e; print \$_;"
+
