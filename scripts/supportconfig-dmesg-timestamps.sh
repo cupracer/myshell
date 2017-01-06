@@ -28,11 +28,6 @@ if [ $MISSINGFILES -ne 0 ]; then
 	exit 1
 fi
 
-sed -n "/\#\ \/bin\/dmesg/,\$p" "${BASEDIR}/boot.txt" | sed "1d" | \
-	perl -ne "BEGIN{\$a= $(date --date="$(cat "${BASEDIR}/basic-environment.txt" |grep -A1 /bin/date |grep -v date)" +\"%s\")- \
-		qx!$(grep -A1 \"/proc/uptime\" "${BASEDIR}/proc.txt" |grep -v uptime)!}; s/\[\s*(\d+)\.\d+\]/localtime(\$1 + \$a)/e; print \$_;"
-
-
 SCDMESG=$(sed -n "/\#\ \/bin\/dmesg/,\$p" "${BASEDIR}/boot.txt" | sed "1d")
 SCDATETIME="$(cat "${BASEDIR}/basic-environment.txt" |grep -A1 /bin/date |grep -v date)"
 SCTIMESTAMP=$(date --date="${SCDATETIME}" +"%s")
