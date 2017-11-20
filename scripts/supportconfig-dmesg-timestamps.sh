@@ -29,8 +29,9 @@ if [ $MISSINGFILES -ne 0 ]; then
 fi
 
 SCDMESG=$(sed -n "/\#\ \/bin\/dmesg/,\$p" "${BASEDIR}/boot.txt" | sed "1d")
-SCDATETIME="$(cat "${BASEDIR}/basic-environment.txt" |grep -A1 /bin/date |grep -v date)"
-SCTIMESTAMP=$(date --date="${SCDATETIME}" +"%s")
+#SCDATETIME="$(cat "${BASEDIR}/basic-environment.txt" |grep -A1 /bin/date |grep -v date)"
+#SCTIMESTAMP=$(date --date="${SCDATETIME}" +"%s")
+SCTIMESTAMP=$(date -r ${BASEDIR}/basic-environment.txt +"%s")
 SCUPTIME=$(grep -A1 "/proc/uptime" "${BASEDIR}/proc.txt" |grep -v uptime |cut -d" " -f1)
 
 #echo "SCDATETIME  = ${SCDATETIME}"
