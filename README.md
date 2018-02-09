@@ -37,6 +37,11 @@ zypper in \
     perl-Unicode-String
 ```
 
+Example:
+```
+/opt/myshell/vendor/imapsync/imapsync --host1 $SRCHOST --ssl1 --user1 $SRCUSER --passfile1 passfile1.txt --host2 $DSTHOST --ssl2 --user2 $DSTUSER --passfile2 passfile2.txt --delete2 --delete2duplicates
+```
+
 ## vendor/MySQL-Tuner
 Usage:
 ```
